@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+    --breakpoint-cv:8rem;
+}
+

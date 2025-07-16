@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+
+@theme {
+  --animate-fade: 5s linear 1s infinite alternate none running newfade;
+  @keyframes newfade {
+    from {top:0;
+        left:0}
+    to {
+      top:0;
+      left:1200px
+    }
+  }
+}

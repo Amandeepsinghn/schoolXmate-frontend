@@ -4,7 +4,7 @@ import { Button } from "../components/button";
 
 export const Dashboard = () => {
     return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col flex-wrap">
         <div className=" bg-[#FFFFFF] flex justify-between items-center p-4 pt-4">
             <div className="flex items-center">
                 <div className="flex items-center">
