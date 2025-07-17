@@ -1,4 +1,4 @@
-import { useRef, useState,useEffect } from "react";
+import { useRef, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios, { AxiosError } from "axios";
 
@@ -40,7 +40,7 @@ export const Login = () => {
                   password:password.current?.value
                 })
               localStorage.setItem("Authorization","Bearer" + " " + reponse.data.token);
-              naivgate("/landingPage")
+              naivgate("/landing")
               
               } catch(error:unknown) {
                 const err = error as AxiosError

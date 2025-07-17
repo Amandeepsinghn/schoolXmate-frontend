@@ -3,6 +3,9 @@ import {Login} from "./pages/Login"
 import './App.css'
 import { Dashboard } from './pages/Dashboard'
 import { Signup } from './pages/Signup'
+import { Landing } from './pages/Landing'
+import { Test } from './pages/Test'
+import { ChatPdf } from './pages/chatPdf'
 
 function App() {
 
@@ -10,9 +13,12 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path ="/signup" element={<Signup/>}/>
-        <Route path ="/login" element={<Login/>} />
-        <Route path ="/dashboard" element={<Dashboard/>}/> 
+        <Route path = "/signup" element={<Signup/>}/>
+        <Route path = "/login" element={<Login/>} />
+        <Route path = "/dashboard" element={<Dashboard/>}/> 
+        <Route path = "/landing" element={<Landing/>}/>
+        <Route path = "/test" element={<Test/>}/>
+        <Route path = "/chatPdf" element={<ChatPdf/>}/>
       </Routes>
     </BrowserRouter>
     </>

@@ -37,7 +37,7 @@ export const Dashboard = () => {
                     </div>
                 </div> 
                 <div className="flex-grow">
-                    <img src = "/ai.gif" alt="local gif" className="w-180 h-auto"/>
+                    <img src = "/ai.gif" alt="local gif" className="w-170 h-auto"/>
                 </div>
             </div>
         </div>
