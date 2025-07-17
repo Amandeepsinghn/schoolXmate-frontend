@@ -73,7 +73,7 @@ export const Profile = () =>{
 
             </div>
             <hr className="border-t border-gray-200 opacity-50 border-1"></hr>
-            <div className="flex justify-around h-full">
+            <div className="flex justify-around h-full flex-wrap">
                 <div className="flex flex-col space-y-5 mt-10">
                     <div className="text-3xl font-bold">
                         Profile

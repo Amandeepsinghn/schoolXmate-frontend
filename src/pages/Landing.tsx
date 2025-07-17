@@ -6,7 +6,6 @@ import { useState } from "react";
 export const Landing = () =>{
 
     const [exit,setExit] = useState<boolean>(false)
-    const [profile,setProfile] = useState<boolean>(false)
 
     return(
         <div className="flex flex-col h-screen">
@@ -24,7 +23,7 @@ export const Landing = () =>{
                     </Link>
                     <div className="hover:cursor-pointer relative" onClick={()=>{exit===true ? setExit(false) : exit===false ? setExit(true) : ""}}>
                         {exit && <div className="border border-gray-200 bg-gray-50 absolute z-10 right-0.5 top-13 rounded-xl w-25 text-center">
-                            <div className="hover:bg-[#65E32F] p-2" onClick={()=>{setProfile(true)}}>
+                            <div className="hover:bg-[#65E32F] p-2">
                                 <Link to={"/profile"}>
                                 Profile
                                 </Link>
