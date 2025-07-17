@@ -7,6 +7,7 @@ import { Landing } from './pages/Landing'
 import { Test } from './pages/Test'
 import { ChatPdf } from './pages/chatPdf'
 import { Profile } from './pages/Profile'
+import { UpdateProfile } from './pages/updateProfile'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path = "/test" element={<Test/>}/>
         <Route path = "/chatPdf" element={<ChatPdf/>}/>
         <Route path = "/profile" element = {<Profile/>}/>
+        <Route path = "/profileUpdate" element = {<UpdateProfile/>}/>
       </Routes>
     </BrowserRouter>
     </>

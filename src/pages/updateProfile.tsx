@@ -1,8 +1,9 @@
 import { AiFillAliwangwang } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios, { AxiosError } from "axios";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 
 interface User {
@@ -14,12 +15,21 @@ interface User {
     }
 }
 
-export const Profile = () =>{
+
+export const UpdateProfile = () => {
 
     const [exit,setExit] = useState<boolean>(false)
     
     const navigate = useNavigate();
     const [user,userData] = useState<User>({"body":{"_id":"", "email":"","name":"","password":""}})
+
+    const nameRef = useRef<HTMLInputElement>(null)
+    const emailRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
+
+    const [loading,setLoading] = useState<boolean>(false)
+    const [resperr,setError] = useState<string>("")
+
 
     useEffect(()=>{
         const fetchData = async () => {
@@ -82,34 +92,59 @@ export const Profile = () =>{
                         <div className="text-3xl pb-2">
                         Name
                         </div>
-                        <div className="rounded-xl w-80 text-left pl-2 text-2xl bg-slate-200 p-2">
-                            {user.body.name}
-                        </div>
+                        <input className="rounded-xl w-80 text-left pl-2 text-2xl bg-slate-200 p-2" defaultValue={user.body.name} ref={nameRef}>
+                        </input>
                     </div>
                     <div>
                         <div className="text-3xl pb-2">
                         Email
                         </div>
-                        <div className="p-2 rounded-xl w-80 text-left pl-2 text-2xl  bg-slate-200">
-                            {user.body.email}
-                        </div>
+                        <input className="p-2 rounded-xl w-80 text-left pl-2 text-2xl  bg-slate-200" defaultValue={user.body.email} ref={emailRef}>
+                        </input>
                     </div>
                     <div>
                         <div className="text-3xl pb-2">
                         Password
                         </div>
-                        <div className="p-2 bg-slate-200 rounded-xl w-80 text-left pl-2 text-2xl">
-                            {user.body.password}
-                        </div>
+                        <input className="p-2 bg-slate-200 rounded-xl w-80 text-left pl-2 text-2xl" defaultValue={user.body.password} ref={passwordRef}>
+                        </input>
                     </div>
                 </div>
                 <div className="flex justify-center space-x-5 items-center pt-10">
-                    <Link type="button" className=" text-black h-12 bg-gray-200 p-3 rounded-lg font-bold px-9 cursor-pointer hover:bg-gray-100 " to={"/landing"}>
-                        Go back
-                    </Link>
-                    <Link type="button" className=" text-black h-12 bg-[#65E32F] p-3 rounded-lg font-bold px-9 cursor-pointer hover:bg-[#80EE5A] " to={"/profileUpdate"}>
-                        Update Credentials
-                    </Link>
+                    <button type="button" className=" text-black h-12 bg-[#65E32F] p-3 rounded-lg font-bold px-9 cursor-pointer hover:bg-[#80EE5A]" onClick={async() => {
+                        try{
+                            setLoading(true)
+                            const response = await axios.post("http://localhost:8000/api/updateProfile", 
+                                    {
+                                        name: nameRef.current?.value,
+                                        email: emailRef.current?.value,
+                                        password: passwordRef.current?.value
+                                        
+                                    },
+                                    {
+                                    headers:{
+                                        Authorization: localStorage.getItem("Authorization"),
+                                    },
+                                })
+                            navigate("/profile")
+
+                        } catch(error:unknown) {
+                            const err = error as AxiosError
+                            
+                            if(err.response) {
+                                setError("please enter valid email")
+                            }
+                        }
+                    }}>
+                    {loading ? (<div className="flex justify-center space-x-2">
+                        <AiOutlineLoading3Quarters className="animate-spin mt-1">
+                        </AiOutlineLoading3Quarters>
+                        <div>
+                        Updating ...
+                        </div>
+                    </div>): 
+                    ("Update")}
+                    </button>
                 </div>
             </div>
         </div>
