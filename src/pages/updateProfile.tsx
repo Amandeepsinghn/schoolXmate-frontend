@@ -63,6 +63,9 @@ export const UpdateProfile = () => {
                     <Link type="button" className="font-medium shadow-[#80EE5A]-500/50 underline" to={"/test"}>
                         Test
                     </Link>
+                    <Link type="button" className="font-medium shadow-[#80EE5A]-500/50 underline" to={"/landing"}>
+                        Home
+                    </Link>
                     <div className="hover:cursor-pointer relative" onClick={()=>{exit===true ? setExit(false) : exit===false ? setExit(true) : ""}}>
                         {exit && <div className="border border-gray-200 bg-gray-50 absolute z-10 right-0.5 top-13 rounded-xl w-25 text-center">
                             <div className="hover:bg-[#65E32F] p-2">

@@ -8,6 +8,7 @@ import { Test } from './pages/Test'
 import { ChatPdf } from './pages/chatPdf'
 import { Profile } from './pages/Profile'
 import { UpdateProfile } from './pages/updateProfile'
+import { Chat } from './pages/chat'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path = "/chatPdf" element={<ChatPdf/>}/>
         <Route path = "/profile" element = {<Profile/>}/>
         <Route path = "/profileUpdate" element = {<UpdateProfile/>}/>
+        <Route path = "chat/:sessionId" element = {<Chat/>}/>
       </Routes>
     </BrowserRouter>
     </>
