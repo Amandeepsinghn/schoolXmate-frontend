@@ -1,10 +1,11 @@
 import type { Axios, AxiosError } from "axios";
 import { Headers } from "../components/header"
-import {useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useDropzone} from 'react-dropzone'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { BlinkBlur } from "react-loading-indicators";
 
 interface Session {
     body:{
@@ -12,10 +13,24 @@ interface Session {
     }
 }
 
+interface ChatHistoryItem {
+    question:string
+    answer:string
+}
+
+interface Data {
+    _id:string
+    name:string 
+    chatHistory:ChatHistoryItem[]
+}
+
 export const ChatPdf = () =>{
 
-    const formData = new FormData();
+    const [loading,setLoading] = useState<boolean>(false)
 
+    const [data,setdata] = useState<Data[]>([])
+
+    const formData = new FormData();
 
     const navigate = useNavigate();
 
@@ -23,6 +38,7 @@ export const ChatPdf = () =>{
         if (files[0].type==="application/pdf") {
             formData.append('file',files[0])
             try{
+                setLoading(true)
                 const response = await axios.post("http://localhost:8000/api/chatPdf/uploadFile",
                     formData,
                     {headers:{Authorization: localStorage.getItem("Authorization")}})
@@ -44,11 +60,22 @@ export const ChatPdf = () =>{
         }
     }, [])
 
+    useEffect(()=>{
+        const getData = async()=>{
+            const response = await axios.get("http://localhost:8000/api/chatPdf/getAllpdf",{
+                headers:{Authorization:localStorage.getItem("Authorization")}
+            })
+            setdata(response.data.body)
+        }
+        getData() 
+    },[])
+
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
     return(
         <Headers>
-            <div className="flex flex-col pl-50 space-y-2.5 mt-14">
+            {loading && <div className="flex justify-center mt-90"><BlinkBlur color="#32cd32" size="medium" text="" textColor="" /></div>} 
+            {loading==false && <div className="flex flex-col pl-50 space-y-2.5 mt-14">
                 <div className="text-3xl font-bold">
                     ChatPdf
                 </div>
@@ -63,7 +90,7 @@ export const ChatPdf = () =>{
                             ""
                         }
                     <div>
-                        <div className="font-semibold text-center">
+                        <div className="font-semibold text-center relative">
                             Drag and drop a PDF here
                         </div>
                         <div className="text-sm text-center ">
@@ -80,7 +107,7 @@ export const ChatPdf = () =>{
                 <div className="font-semibold text-2xl pt-3">
                     Previous Chats
                 </div>
-            </div>
+            </div>}
         </Headers>
     )
 }
