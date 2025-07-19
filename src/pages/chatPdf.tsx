@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { BlinkBlur } from "react-loading-indicators";
+import { Pdf } from "../components/allPdf";
 
 interface Session {
     body:{
@@ -107,6 +108,7 @@ export const ChatPdf = () =>{
                 <div className="font-semibold text-2xl pt-3">
                     Previous Chats
                 </div>
+                <Pdf data = {data}/>
             </div>}
         </Headers>
     )
