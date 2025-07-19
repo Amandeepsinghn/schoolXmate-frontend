@@ -63,10 +63,18 @@ export const ChatPdf = () =>{
 
     useEffect(()=>{
         const getData = async()=>{
+            try{
             const response = await axios.get("http://localhost:8000/api/chatPdf/getAllpdf",{
                 headers:{Authorization:localStorage.getItem("Authorization")}
             })
             setdata(response.data.body)
+            } catch(error:unknown) {
+                const err = error as AxiosError
+
+                if(err.response && err.response.status==403) {
+                    navigate("/dashboard")
+                }
+            }
         }
         getData() 
     },[])
