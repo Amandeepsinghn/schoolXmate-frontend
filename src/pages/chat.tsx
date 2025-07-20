@@ -13,8 +13,9 @@ export const Chat = () => {
     const {sessionId} = useParams();
     const [chat,setChat] = useState<Chats[]>([])
     const navigate = useNavigate()
-    const questionRef = useRef<HTMLInputElement>(null)
+    const questionRef = useRef<HTMLInputElement | null>(null)
     const [loading,setLoading] = useState<boolean>(false)
+    const messagesEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(()=>{
         
@@ -39,6 +40,10 @@ export const Chat = () => {
         getChats()
         },[])
         let number = 0
+
+    useEffect(()=>{
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    },[chat])
     
 
     return  <Headers>
@@ -47,7 +52,7 @@ export const Chat = () => {
             <div className="flex pl-2 h-150 w-300 rounded-2xl overflow-y-auto p-2">
                 <div className="min-h-min w-screen">
                     {chat.map((item)=>(
-                        <div key={number+=1} className="">
+                        <div ref={messagesEndRef} key={number+=1} className="">
                             <div className="flex justify-end my-2"> 
                                 <div className="pr-2 bg-[#65E32F] rounded-2xl max-70 p-2">
                                     <div className="flex justify-end">
@@ -66,9 +71,8 @@ export const Chat = () => {
         </div>
         <div className="flex justify-center">
             <div className="flex bg-[#eef7ee] justify-between p-2 w-300 rounded-2xl">
-                <input className="flex-grow outline-0" placeholder="Ask a question..." ref={questionRef}>
-                </input>
-                <button className="bg-[#65E32F] rounded-2xl p-2 px-6 font-semibold cursor-pointer hover:bg-[#80EE5A]" onClick={async()=>{
+                <input className="flex-grow outline-0" type="text" placeholder="Ask a question..." ref={questionRef}/>
+                <button className="bg-[#65E32F] rounded-2xl p-2 px-6 font-semibold cursor-pointer hover:bg-[#80EE5A]" disabled={loading} onClick={async()=>{
                     const question = questionRef.current?.value
                     
                     if(!question) return
@@ -81,6 +85,9 @@ export const Chat = () => {
                         const newAnswer = newData.body as string
 
                         setLoading(false)
+                        if(questionRef.current) {
+                            questionRef.current.value = ""
+                        }
                         setChat([...chat,{"answer":newAnswer,"question":question}])
                         
                     } catch (error:unknown) {
