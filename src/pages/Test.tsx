@@ -238,14 +238,17 @@ export const Test = () => {
                                     setDifficultyLevel(false)
                                     if(nextData.data.body.isComplete) {
                                         showsetLoading(true)
-                                        axios.post("http://localhost:8000/api/test/generateTest",{
+                                        const generatedData = await axios.post("http://localhost:8000/api/test/generateTest",{
                                             "topic":nextData.data.body.topic,
                                             "subTopic":nextData.data.body.subTopic,
                                             "difficultLevel":nextData.data.body.difficultLevel
                                         },{headers:{
                                         Authorization: localStorage.getItem("Authorization"),
                                     },})
-                                    navigate('/dashboard')
+
+                                    const id = await generatedData.data.body
+
+                                    navigate(`giveTest/${id}`)
                                     }
                                 }
 

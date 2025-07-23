@@ -1,4 +1,5 @@
 import { IoMdClipboard } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 interface test {
     _id:string 
@@ -13,6 +14,9 @@ interface newData {
 
 
 export const Card = ({data}:newData) => {
+
+    const navigate = useNavigate();
+
     return(
         <>
             {data.map((item)=>(
@@ -29,7 +33,9 @@ export const Card = ({data}:newData) => {
                             <div className="bg-[#bae6fd] text-black rounded-md p-1">
                                 {item.current_position}/10 Position 
                             </div>
-                            <button className="bg-[#5F9C4C] hover:bg-[#365314] rounded-md p-1 cursor-pointer hover:bg-[#365314]">
+                            <button className="bg-[#5F9C4C] rounded-md p-1 cursor-pointer hover:bg-[#365314]" onClick={async()=>{
+                                navigate(`/giveTest/${item._id}`)
+                            }}>
                                 <p className="text-white text-shadow-2xs">
                                     Resume
                                 </p>
