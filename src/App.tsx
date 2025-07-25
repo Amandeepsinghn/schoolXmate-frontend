@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path = "/signup" element={<Signup/>}/>
         <Route path = "/login" element={<Login/>} />
-        <Route path = "/dashboard" element={<Dashboard/>}/> 
+        <Route path = "/" element={<Dashboard/>}/> 
         <Route path = "/landing" element={<Landing/>}/>
         <Route path = "/test" element={<Test/>}/>
         <Route path = "/chatPdf" element={<ChatPdf/>}/>

@@ -38,7 +38,7 @@ export const Headers = ({children}:childrenProp) => {
                             </div>
                             <div className="border-b border-1 opacity-70 border-gray-200"></div>
                             <div className="hover:bg-red-100 p-2"> 
-                            <Link className="text-red-600" onClick={()=>localStorage.removeItem("Authorization")} to={"/dashboard"}>
+                            <Link className="text-red-600" onClick={()=>localStorage.removeItem("Authorization")} to={"/"}>
                                 Sign out
                             </Link>
                             </div>

@@ -57,7 +57,7 @@ export const Test = () => {
                 const err = error as AxiosError
 
                 if(err.response && err.response.status==403) {
-                    navigate("/dashboard")
+                    navigate("/")
                 }
             }
         }
@@ -97,7 +97,7 @@ export const Test = () => {
                         } catch(error:unknown) {
                             const err = error as AxiosError
                             if(err.response && err.response.status==403) {
-                                navigate("/dashboard")
+                                navigate("/")
                             }
                         }  
                         }}>

@@ -55,7 +55,7 @@ export const Maintest = () => {
                 const err = error as AxiosError
 
                 if(err.response && err.response.status==403) {
-                    navigate("/dashboard")
+                    navigate("/")
                 }
             }
         }

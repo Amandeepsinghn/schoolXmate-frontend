@@ -72,7 +72,7 @@ export const ChatPdf = () =>{
                 const err = error as AxiosError
 
                 if(err.response && err.response.status==403) {
-                    navigate("/dashboard")
+                    navigate("/")
                 }
             }
         }

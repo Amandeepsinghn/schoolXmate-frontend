@@ -43,7 +43,7 @@ export const UpdateProfile = () => {
             const err = error as AxiosError
 
             if(err.response) {
-                navigate("/dashboard")
+                navigate("/")
             }
         }
         };
@@ -75,7 +75,7 @@ export const UpdateProfile = () => {
                             </div>
                             <div className="border-b border-1 opacity-70 border-gray-200"></div>
                             <div className="hover:bg-red-100 p-2"> 
-                            <Link className="text-red-600" onClick={()=>localStorage.removeItem("Authorization")} to={"/dashboard"}>
+                            <Link className="text-red-600" onClick={()=>localStorage.removeItem("Authorization")} to={"/"}>
                                 Sign out
                             </Link>
                             </div>
