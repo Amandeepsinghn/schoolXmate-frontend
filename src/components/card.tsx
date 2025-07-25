@@ -31,13 +31,13 @@ export const Card = ({data}:newData) => {
                         </div>
                         <div className="flex justify-between space-x-2 mt-1">
                             <div className="bg-[#bae6fd] text-black rounded-md p-1">
-                                {item.current_position}/10 Position 
+                                Good Luck 
                             </div>
                             <button className="bg-[#5F9C4C] rounded-md p-1 cursor-pointer hover:bg-[#365314]" onClick={async()=>{
                                 navigate(`/giveTest/${item._id}`)
                             }}>
-                                <p className="text-white text-shadow-2xs">
-                                    Resume
+                                <p className="text-white text-shadow-2xs px-1">
+                                    Start
                                 </p>
                             </button>
                         </div>

@@ -119,7 +119,7 @@ export const Test = () => {
                 </div>
             </div>}
             {showLoading==false && middleBar==true && topic==true &&<div className="flex justify-center mt-30 w-2xl">
-                <div className="border border-gray-500 border-opacity-35 rounded-2xl shadow-2xl bg-white p-2">
+                <div className="border border-gray-500 border-opacity-35 rounded-2xl shadow-2xl bg-white p-2 ml-3 text-center">
                     {topic && <div className="flex flex-col">
                         <div className="text-2xl font-semibold">
                             {inputData.notValidTopic ? inputData.message : "Enter the Topic to create the Test like maths, chemistry, science etc."}
@@ -165,7 +165,7 @@ export const Test = () => {
                 </div>
                 </div>} 
              {showLoading==false && middleBar==true && subTopic==true &&<div className="flex justify-center mt-30 w-2xl">
-                <div className="border border-gray-500 border-opacity-35 rounded-2xl shadow-2xl bg-white p-2 flex justify-center">
+                <div className="border border-gray-500 border-opacity-35 rounded-2xl shadow-2xl bg-white p-2 flex justify-center text-center ml-3">
                     {subTopic && <div className="flex flex-col">
                         <div className="text-2xl font-semibold">
                             {inputData.message}
@@ -210,7 +210,7 @@ export const Test = () => {
                 </div>
                 </div>}
             {showLoading==false && middleBar==true && difficultLevel==true &&<div className="flex justify-center mt-30 w-2xl">
-                <div className="border border-gray-500 border-opacity-35 rounded-2xl shadow-2xl bg-white p-2">
+                <div className="border border-gray-500 border-opacity-35 rounded-2xl shadow-2xl bg-white p-2 ml-3 text-center">
                     {difficultLevel && <div className="flex flex-col">
                         <div className="text-2xl font-semibold">
                             {inputData.message}
@@ -248,7 +248,7 @@ export const Test = () => {
 
                                     const id = await generatedData.data.body
 
-                                    navigate(`giveTest/${id}`)
+                                    navigate(`/giveTest/${id}`)
                                     }
                                 }
 
