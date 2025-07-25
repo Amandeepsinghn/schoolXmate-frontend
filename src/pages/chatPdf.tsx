@@ -8,6 +8,9 @@ import axios from "axios";
 import { BlinkBlur } from "react-loading-indicators";
 import { Pdf } from "../components/allPdf";
 
+const baseUrl = import.meta.env.VITE_ENDPOINT 
+
+
 interface Session {
     body:{
         "sessionId":string
@@ -40,7 +43,7 @@ export const ChatPdf = () =>{
             formData.append('file',files[0])
             try{
                 setLoading(true)
-                const response = await axios.post("http://localhost:8000/api/chatPdf/uploadFile",
+                const response = await axios.post(`${baseUrl}/api/chatPdf/uploadFile`,
                     formData,
                     {headers:{Authorization: localStorage.getItem("Authorization")}})
                 
@@ -64,7 +67,7 @@ export const ChatPdf = () =>{
     useEffect(()=>{
         const getData = async()=>{
             try{
-            const response = await axios.get("http://localhost:8000/api/chatPdf/getAllpdf",{
+            const response = await axios.get(`${baseUrl}/api/chatPdf/getAllpdf`,{
                 headers:{Authorization:localStorage.getItem("Authorization")}
             })
             setdata(response.data.body)

@@ -4,7 +4,7 @@ import { useAsyncError, useNavigate, useParams } from "react-router-dom"
 import { Headers } from "../components/header"
 
 
-
+const baseUrl = import.meta.env.VITE_ENDPOINT
 
 interface test {
     question:string 
@@ -46,7 +46,7 @@ export const Maintest = () => {
     useEffect(()=>{
         const getData = async () => {
             try {
-            const response = await axios.get(`http://localhost:8000/api/test/getTest/${testId}`,{
+            const response = await axios.get(`${baseUrl}/api/test/getTest/${testId}`,{
                     headers:{Authorization:localStorage.getItem("Authorization")}
                 })
             setTest(response.data.body.test)

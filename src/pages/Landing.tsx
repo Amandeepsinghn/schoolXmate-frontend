@@ -2,6 +2,7 @@ import { AiFillAliwangwang } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
+const baseUrl = import.meta.env.VITE_ENDPOINT 
 
 export const Landing = () =>{
 

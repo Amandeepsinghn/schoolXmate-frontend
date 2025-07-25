@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+const baseUrl = import.meta.env.VITE_ENDPOINT 
+
 interface Chats {
     "question":string | null
     "answer":string
@@ -21,7 +23,7 @@ export const Chat = () => {
         
         const getChats = async () => {
             try {
-                const response = await axios.post("http://localhost:8000/api/chatPdf/getSinglePdf",
+                const response = await axios.post(`${baseUrl}/api/chatPdf/getSinglePdf`,
                     {"id":sessionId},{
                         headers:{Authorization:localStorage.getItem("Authorization")}
                     })
@@ -78,7 +80,7 @@ export const Chat = () => {
                     if(!question) return
                     try{
                         setLoading(true)
-                        const response = await axios.post(`http://localhost:8000/api/chatPdf/qaChat/${sessionId}`,{
+                        const response = await axios.post(`${baseUrl}/api/chatPdf/qaChat/${sessionId}`,{
                             question:question
                         },{headers:{Authorization:localStorage.getItem("Authorization")}})
                         const newData = response.data

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+const baseUrl = import.meta.env.VITE_ENDPOINT
 
 interface User {
     body: {
@@ -34,7 +35,7 @@ export const UpdateProfile = () => {
     useEffect(()=>{
         const fetchData = async () => {
         try {
-            const response = await axios.get("http://localhost:8000/api/getProfile",{
+            const response = await axios.get(`${baseUrl}/api/getProfile`,{
                 headers:{Authorization:localStorage.getItem("Authorization")}
             })
             userData(response.data)
@@ -117,7 +118,7 @@ export const UpdateProfile = () => {
                     <button type="button" className=" text-black h-12 bg-[#65E32F] p-3 rounded-lg font-bold px-9 cursor-pointer hover:bg-[#80EE5A]" onClick={async() => {
                         try{
                             setLoading(true)
-                            const response = await axios.post("http://localhost:8000/api/updateProfile", 
+                            const response = await axios.post(`${baseUrl}/api/updateProfile`, 
                                     {
                                         name: nameRef.current?.value,
                                         email: emailRef.current?.value,

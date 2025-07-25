@@ -6,6 +6,8 @@ import { Card } from "../components/card";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { BlinkBlur } from "react-loading-indicators";
 
+const baseUrl = import.meta.env.VITE_ENDPOINT
+
 interface test {
     _id:string 
     topic:string
@@ -49,7 +51,7 @@ export const Test = () => {
     useEffect(()=>{
         const getData = async () => {
             try {
-            const response = await axios.get("http://localhost:8000/api/test/getAllTest",{
+            const response = await axios.get(`${baseUrl}/api/test/getAllTest`,{
                     headers:{Authorization:localStorage.getItem("Authorization")}
                 })
             setTest(response.data.body)
@@ -86,7 +88,7 @@ export const Test = () => {
                     <button className="bg-[#5F9C4C] p-3 rounded-md cursor-pointer shadow-2xl transition delay-150 duration-300 ease-in-out hover:-translate-z-2 hover:scale-110 hover:bg-[#365314]"
                         onClick={async()=> {
                             try {
-                            const sessionData = await axios.post("http://localhost:8000/api/test/intialize",{
+                            const sessionData = await axios.post(`${baseUrl}/api/test/intialize`,{
                                 start:true
                             },{headers:{Authorization:localStorage.getItem("Authorization")}})
                             
@@ -128,7 +130,7 @@ export const Test = () => {
                             <input placeholder="Enter Topic" className="p-2 bg-gray-100 w-full rounded-md outline-0" ref={inputRef}/>
                             <button className="bg-[#5F9C4C] p-2 px-5 rounded-md hover:bg-[#365314]" disabled={loading} onClick={async()=>{
                                 setLoading(true)
-                                const nextData = await axios.post("http://localhost:8000/api/test/respond",{topic:inputRef.current?.value,sessionId:session.sessionId},{
+                                const nextData = await axios.post(`${baseUrl}/api/test/respond`,{topic:inputRef.current?.value,sessionId:session.sessionId},{
                                     headers:{
                                         Authorization: localStorage.getItem("Authorization"),
                                     },
@@ -174,7 +176,7 @@ export const Test = () => {
                             <input placeholder="Enter Topic" className="p-2 bg-gray-100 w-full rounded-md outline-0" ref={inputRef}/>
                             <button className="bg-[#5F9C4C] p-2 px-5 rounded-md hover:bg-[#365314]" disabled={loading} onClick={async()=>{
                                 setLoading(true)
-                                const nextData = await axios.post("http://localhost:8000/api/test/respond",{subTopic:inputRef.current?.value,sessionId:session.sessionId},{
+                                const nextData = await axios.post(`${baseUrl}/api/test/respond`,{subTopic:inputRef.current?.value,sessionId:session.sessionId},{
                                     headers:{
                                         Authorization: localStorage.getItem("Authorization"),
                                     },
@@ -219,7 +221,7 @@ export const Test = () => {
                             <input placeholder="Enter Topic" className="p-2 bg-gray-100 w-full rounded-md outline-0" ref={inputRef}/>
                             <button className="bg-[#5F9C4C] p-2 px-5 rounded-md hover:bg-[#365314]" disabled={loading} onClick={async()=>{
                                 setLoading(true)
-                                const nextData = await axios.post("http://localhost:8000/api/test/respond",{difficultLevel:inputRef.current?.value,sessionId:session.sessionId},{
+                                const nextData = await axios.post(`${baseUrl}/api/test/respond`,{difficultLevel:inputRef.current?.value,sessionId:session.sessionId},{
                                     headers:{
                                         Authorization: localStorage.getItem("Authorization"),
                                     },
@@ -238,7 +240,7 @@ export const Test = () => {
                                     setDifficultyLevel(false)
                                     if(nextData.data.body.isComplete) {
                                         showsetLoading(true)
-                                        const generatedData = await axios.post("http://localhost:8000/api/test/generateTest",{
+                                        const generatedData = await axios.post(`${baseUrl}/api/test/generateTest`,{
                                             "topic":nextData.data.body.topic,
                                             "subTopic":nextData.data.body.subTopic,
                                             "difficultLevel":nextData.data.body.difficultLevel

@@ -1,6 +1,7 @@
 import { AiFillAliwangwang } from "react-icons/ai";
 import { Button } from "../components/button";
 
+const baseUrl = import.meta.env.VITE_ENDPOINT 
 
 export const Dashboard = () => {
     return (

@@ -14,6 +14,8 @@ interface User {
     }
 }
 
+const baseUrl = import.meta.env.VITE_ENDPOINT
+
 export const Profile = () =>{
 
     const [exit,setExit] = useState<boolean>(false)
@@ -24,7 +26,7 @@ export const Profile = () =>{
     useEffect(()=>{
         const fetchData = async () => {
         try {
-            const response = await axios.get("http://localhost:8000/api/getProfile",{
+            const response = await axios.get(`${baseUrl}/api/getProfile`,{
                 headers:{Authorization:localStorage.getItem("Authorization")}
             })
             userData(response.data)

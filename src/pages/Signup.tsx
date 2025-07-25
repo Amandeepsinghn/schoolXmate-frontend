@@ -3,7 +3,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios, { AxiosError } from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
-
+const baseUrl = import.meta.env.VITE_ENDPOINT
 
 export const Signup = () => {
 
@@ -42,7 +42,7 @@ export const Signup = () => {
             <button type="button" className="w-full bg-[#80EE5A] mt-2 rounded-2xl p-2 cursor-pointer" disabled={loading} onClick={async()=>{
               setLoading(true)
               try {
-                await axios.post("http://localhost:8000/api/signUp",{
+                await axios.post(`${baseUrl}/api/signUp`,{
                   name:name.current?.value,
                   email:email.current?.value,
                   password:password.current?.value

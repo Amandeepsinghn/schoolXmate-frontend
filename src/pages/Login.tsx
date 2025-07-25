@@ -4,6 +4,8 @@ import axios, { AxiosError } from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
 
+const baseUrl = import.meta.env.VITE_ENDPOINT 
+
 export const Login = () => {
   const email = useRef<HTMLInputElement>(null)
   const password = useRef<HTMLInputElement>(null)
@@ -35,7 +37,7 @@ export const Login = () => {
             <button className="w-full bg-[#80EE5A] mt-2 rounded-2xl p-2 cursor-pointer" onClick={async ()=> {
               try{
               setLoading(true)
-              const reponse = await axios.post("http://localhost:8000/api/logIn",
+              const reponse = await axios.post(`${baseUrl}/api/logIn`,
                 {email:email.current?.value,
                   password:password.current?.value
                 })
