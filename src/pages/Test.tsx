@@ -71,7 +71,7 @@ export const Test = () => {
             {showLoading==false && middleBar==false && <div className="h-screen space-y-7">
                 <div className="flex justify-start ml-12">
                     <div className="text-6xl font-bold text-shadow-2xs" >
-                        Infinite Test Prep
+                        Test Preperation
                     </div >
                 </div>
                 <div className="flex flex-col ml-12">
