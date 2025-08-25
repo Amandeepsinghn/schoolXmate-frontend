@@ -18,7 +18,7 @@ export const Dashboard = () => {
 
         {/* Auth Buttons */}
         <div className="flex w-full sm:w-auto justify-center sm:justify-end items-center space-x-2 mt-2 sm:mt-0">
-          <Button label="Sign Up" color="green" />
+          <Button label="SignUp" color="green" />
           <Button label="Log In" color="gray" />
         </div>
       </div>
