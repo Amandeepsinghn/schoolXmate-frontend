@@ -3,85 +3,83 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios, { AxiosError } from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
-const baseUrl = import.meta.env.VITE_ENDPOINT
+const baseUrl = import.meta.env.VITE_ENDPOINT;
 
 export const Signup = () => {
-
-  const name = useRef<HTMLInputElement>(null)
-  const email = useRef<HTMLInputElement>(null)
-  const password = useRef<HTMLInputElement>(null)
-  const [loading,setLoading] = useState<boolean>(false)
-  const [err,setError] = useState<string>("")
+  const name = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [err, setError] = useState<string>("");
   const naivgate = useNavigate();
 
-    return <div className="w-screen h-screen bg-[url('/sln.jpg')] bg-cover bg-center">
-      <div className="flex justify-center h-full">
-        <div className="flex items-center">
-          <div className="rounded-lg bg-white w-80 text-center p-2 px-4 inset-ring-2">
-            <div className="text-2xl font-semibold">
-              Signup
-            </div>
+  return (
+    <div className="w-screen h-screen bg-[url('/sln.jpg')] bg-cover bg-center">
+      <div className="flex justify-center h-full px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center w-full">
+          <div className="rounded-lg bg-white w-full max-w-md text-center p-4 sm:p-6 lg:p-8 shadow-md">
+            <div className="text-2xl font-semibold">Signup</div>
             <div className="text-slate-500 font-normal">
-                Enter your information to create an account
+              Enter your information to create an account
             </div>
-            <div className="font-semibold text-left ">
-              Name
-            </div>
-            <input className="w-full px-2 py-1 border rounded-2xl border-slate-200" ref={name}>
-            </input>
-            <div className="font-semibold text-left">
-              Email
-            </div>
-            <input className="w-full px-2 py-1 border rounded-2xl border-slate-200" ref={email}>
-            </input>
-            <div className="font-semibold text-left">
-              Password
-            </div>
-            <input className="w-full px-2 py-1 border rounded-2xl border-slate-200" ref={password}>
-            </input>
-            <button type="button" className="w-full bg-[#80EE5A] mt-2 rounded-2xl p-2 cursor-pointer" disabled={loading} onClick={async()=>{
-              setLoading(true)
-              try {
-                await axios.post(`${baseUrl}/api/signUp`,{
-                  name:name.current?.value,
-                  email:email.current?.value,
-                  password:password.current?.value
-                })
-                naivgate("/login")
-
-              } catch(error:unknown) {
-                const err = error as AxiosError
-                setLoading(false)
-                if(err.response && err.response.status===404) {
-                  setError("email already exsist.")
-                } else if (err.response && err.response.status===422) {
-                  setError("please enter valid name,email and password.")
+            <div className="font-semibold text-left ">Name</div>
+            <input
+              className="w-full px-2 py-1 border rounded-2xl border-slate-200"
+              ref={name}
+            ></input>
+            <div className="font-semibold text-left">Email</div>
+            <input
+              className="w-full px-2 py-1 border rounded-2xl border-slate-200"
+              ref={email}
+            ></input>
+            <div className="font-semibold text-left">Password</div>
+            <input
+              className="w-full px-2 py-1 border rounded-2xl border-slate-200"
+              ref={password}
+            ></input>
+            <button
+              type="button"
+              className="w-full bg-[#80EE5A] mt-2 rounded-2xl p-2 cursor-pointer"
+              disabled={loading}
+              onClick={async () => {
+                setLoading(true);
+                try {
+                  await axios.post(`${baseUrl}/api/signUp`, {
+                    name: name.current?.value,
+                    email: email.current?.value,
+                    password: password.current?.value,
+                  });
+                  naivgate("/login");
+                } catch (error: unknown) {
+                  const err = error as AxiosError;
+                  setLoading(false);
+                  if (err.response && err.response.status === 404) {
+                    setError("email already exsist.");
+                  } else if (err.response && err.response.status === 422) {
+                    setError("please enter valid name,email and password.");
+                  }
                 }
-
-              }
-            }}>
-              {loading ? (<div className="flex justify-center space-x-2">
-                <AiOutlineLoading3Quarters className="animate-spin mt-1">
-                </AiOutlineLoading3Quarters>
-                <div>
-                  Processing
+              }}
+            >
+              {loading ? (
+                <div className="flex justify-center space-x-2">
+                  <AiOutlineLoading3Quarters className="animate-spin mt-1"></AiOutlineLoading3Quarters>
+                  <div>Processing</div>
                 </div>
-              </div>): 
-              ("Sign Up")}
+              ) : (
+                "Sign Up"
+              )}
             </button>
             <div className="flex justify-center mt-1">
-              <div className="text-slate-700">
-                Already have an accound? 
-              </div>
+              <div className="text-slate-700">Already have an accound?</div>
               <Link className="pointer underline cursor-pointer" to={"/login"}>
                 log in
               </Link>
             </div>
-            {err && <div className="text-red-600 text">
-              {err}
-              </div>}
+            {err && <div className="text-red-600 text">{err}</div>}
           </div>
         </div>
       </div>
     </div>
-}
+  );
+};
